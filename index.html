@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroCalc Web — Dashboard Agrícola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <i data-lucide="sprout" size="24"></i>
+        </div>
+        <span class="logo-text">Agro<span class="logo-highlight">Calc</span></span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Menu</div>
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <i data-lucide="layout-dashboard" size="20"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="custos">
+        <i data-lucide="wallet" size="20"></i>
+        <span>Custos</span>
+      </a>
+      <a href="#" class="nav-item" data-page="financiamento">
+        <i data-lucide="landmark" size="20"></i>
+        <span>Financiamento</span>
+      </a>
+      <a href="#" class="nav-item" data-page="conversor">
+        <i data-lucide="refresh-cw" size="20"></i>
+        <span>Conversor</span>
+      </a>
+      <a href="#" class="nav-item" data-page="talhoes">
+        <i data-lucide="map-pin" size="20"></i>
+        <span>Talhões</span>
+      </a>
+      <a href="#" class="nav-item" data-page="fertilizantes">
+        <i data-lucide="flask-conical" size="20"></i>
+        <span>Fertilizantes</span>
+      </a>
+      <div class="nav-divider"></div>
+      <div class="nav-section-label">Sistema</div>
+      <a href="#" class="nav-item" data-page="configuracoes">
+        <i data-lucide="settings" size="20"></i>
+        <span>Configurações</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-info">
+        <i data-lucide="help-circle" size="16"></i>
+        <span>Precisa de ajuda?</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-wrapper">
+
+    <header class="header">
+      <div class="menu-toggle" id="menuToggle">
+        <i data-lucide="menu" size="24"></i>
+      </div>
+
+      <div class="search-bar">
+        <i data-lucide="search" size="18" class="search-icon"></i>
+        <input type="text" placeholder="Pesquisar no dashboard..." />
+        <div class="search-shortcut">Ctrl+K</div>
+      </div>
+
+      <div class="header-actions">
+        <button class="action-btn notification-btn">
+          <i data-lucide="bell" size="20"></i>
+          <span class="notification-dot"></span>
+        </button>
+        <div class="user-info">
+          <div class="user-avatar">
+            <span>AC</span>
+          </div>
+          <div class="user-details">
+            <span class="user-name">André Carvalho</span>
+            <span class="user-role">Produtor Rural</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content" id="mainContent">
+
+      <section class="page-section active" id="page-dashboard">
+
+        <div class="page-header">
+          <div>
+            <h1>Dashboard Agrícola</h1>
+            <p class="page-subtitle">Resumo da safra 2025/2026</p>
+          </div>
+          <div class="header-period">
+            <i data-lucide="calendar" size="16"></i>
+            <span>Safra 2025/2026</span>
+          </div>
+        </div>
+
+        <div class="destaque-grid">
+          <div class="destaque-card" style="--accent: var(--accent-green);">
+            <div class="destaque-header">
+              <span class="destaque-label">Área Cultivada</span>
+              <div class="destaque-icon"><i data-lucide="trees" size="22"></i></div>
+            </div>
+            <div class="destaque-value">
+              <span class="counter" data-target="2450">0</span>
+              <span class="destaque-unit">ha</span>
+            </div>
+            <div class="destaque-change positive">
+              <i data-lucide="trending-up" size="16"></i>
+              <span>+12,5% vs safra anterior</span>
+            </div>
+          </div>
+
+          <div class="destaque-card" style="--accent: var(--accent-teal);">
+            <div class="destaque-header">
+              <span class="destaque-label">Produção Estimada</span>
+              <div class="destaque-icon"><i data-lucide="wheat" size="22"></i></div>
+            </div>
+            <div class="destaque-value">
+              <span class="counter" data-target="8520">0</span>
+              <span class="destaque-unit">ton</span>
+            </div>
+            <div class="destaque-change positive">
+              <i data-lucide="trending-up" size="16"></i>
+              <span>+8,3% vs safra anterior</span>
+            </div>
+          </div>
+
+          <div class="destaque-card" style="--accent: var(--accent-green);">
+            <div class="destaque-header">
+              <span class="destaque-label">Receita Prevista</span>
+              <div class="destaque-icon"><i data-lucide="circle-dollar-sign" size="22"></i></div>
+            </div>
+            <div class="destaque-value">
+              <span class="destaque-currency">R$</span>
+              <span class="counter" data-target="1850000">0</span>
+            </div>
+            <div class="destaque-change positive">
+              <i data-lucide="trending-up" size="16"></i>
+              <span>+15,2% vs safra anterior</span>
+            </div>
+          </div>
+
+          <div class="destaque-card" style="--accent: #ef4444;">
+            <div class="destaque-header">
+              <span class="destaque-label">Custos Totais</span>
+              <div class="destaque-icon"><i data-lucide="arrow-down-circle" size="22"></i></div>
+            </div>
+            <div class="destaque-value">
+              <span class="destaque-currency">R$</span>
+              <span class="counter" data-target="720000">0</span>
+            </div>
+            <div class="destaque-change negative">
+              <i data-lucide="trending-down" size="16"></i>
+              <span>-3,1% vs safra anterior</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-section">
+          <div class="chart-header">
+            <div>
+              <h2>Produção por Mês</h2>
+              <p class="chart-subtitle">Evolução mensal em toneladas</p>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-dot" style="background: var(--accent-green);"></span>
+                <span>Produção 2025</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background: var(--accent-teal); opacity: 0.4;"></span>
+                <span>Meta</span>
+              </div>
+            </div>
+          </div>
+          <div class="chart-container" id="chartContainer">
+            <div class="chart-bars" id="chartBars"></div>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+
+          <div class="info-card" style="--card-accent: var(--accent-green);">
+            <div class="card-header">
+              <div class="card-icon">
+                <i data-lucide="calculator" size="20"></i>
+              </div>
+              <span class="card-badge">Financeiro</span>
+            </div>
+            <h3>Custo de Produção</h3>
+            <div class="card-cost-value">
+              <span class="cost-currency">R$</span>
+              <span class="cost-number">245.800,00</span>
+            </div>
+            <div class="cost-breakdown">
+              <div class="cost-item">
+                <span class="cost-item-label">Insumos</span>
+                <span class="cost-item-value">R$ 98.320,00</span>
+                <div class="cost-bar"><div class="cost-bar-fill" style="width: 40%;"></div></div>
+              </div>
+              <div class="cost-item">
+                <span class="cost-item-label">Mão de Obra</span>
+                <span class="cost-item-value">R$ 61.450,00</span>
+                <div class="cost-bar"><div class="cost-bar-fill" style="width: 25%;"></div></div>
+              </div>
+              <div class="cost-item">
+                <span class="cost-item-label">Maquinário</span>
+                <span class="cost-item-value">R$ 49.160,00</span>
+                <div class="cost-bar"><div class="cost-bar-fill" style="width: 20%;"></div></div>
+              </div>
+              <div class="cost-item">
+                <span class="cost-item-label">Logística</span>
+                <span class="cost-item-value">R$ 36.870,00</span>
+                <div class="cost-bar"><div class="cost-bar-fill" style="width: 15%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="--card-accent: var(--accent-teal);">
+            <div class="card-header">
+              <div class="card-icon">
+                <i data-lucide="landmark" size="20"></i>
+              </div>
+              <span class="card-badge">Crédito</span>
+            </div>
+            <h3>Financiamento Agrícola</h3>
+            <div class="financiamento-info">
+              <div class="financiamento-principal">
+                <span class="financiamento-label">Parcela Atual</span>
+                <span class="financiamento-valor">R$ 12.450,00</span>
+              </div>
+              <div class="financiamento-detalhes">
+                <div class="financiamento-item">
+                  <i data-lucide="calendar" size="14"></i>
+                  <span><strong>24</strong> meses restantes</span>
+                </div>
+                <div class="financiamento-item">
+                  <i data-lucide="percent" size="14"></i>
+                  <span><strong>8,5%</strong> a.a.</span>
+                </div>
+                <div class="financiamento-item">
+                  <i data-lucide="check-circle" size="14"></i>
+                  <span><strong>12</strong> parcelas pagas</span>
+                </div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-label">
+                  <span>Progresso</span>
+                  <span>33%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-bar-fill" style="width: 33%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="--card-accent: #8b5cf6;">
+            <div class="card-header">
+              <div class="card-icon">
+                <i data-lucide="refresh-cw" size="20"></i>
+              </div>
+              <span class="card-badge">Utilidades</span>
+            </div>
+            <h3>Conversor de Dados</h3>
+            <div class="conversor-body">
+              <div class="conversor-group">
+                <label class="conversor-label">
+                  <i data-lucide="hash" size="14"></i> Decimal
+                </label>
+                <input type="number" class="conversor-input" id="decInput" value="42" placeholder="0" />
+              </div>
+              <div class="conversor-group">
+                <label class="conversor-label">
+                  <i data-lucide="code" size="14"></i> Binário
+                </label>
+                <div class="conversor-output" id="binOutput">101010</div>
+              </div>
+              <div class="conversor-group">
+                <label class="conversor-label">
+                  <i data-lucide="terminal" size="14"></i> Hexadecimal
+                </label>
+                <div class="conversor-output" id="hexOutput">2A</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="--card-accent: #f59e0b;">
+            <div class="card-header">
+              <div class="card-icon">
+                <i data-lucide="map-pin" size="20"></i>
+              </div>
+              <span class="card-badge">Geo</span>
+            </div>
+            <h3>Mapa de Talhões</h3>
+            <div class="talhoes-tabela">
+              <div class="talhoes-row header">
+                <span>Talhão</span>
+                <span>Área</span>
+                <span>Cultura</span>
+                <span>Status</span>
+              </div>
+              <div class="talhoes-row">
+                <span><span class="talhao-dot" style="background: #00e396;"></span>Norte</span>
+                <span>580 ha</span>
+                <span>Soja</span>
+                <span><span class="status-badge ativo">Ativo</span></span>
+              </div>
+              <div class="talhoes-row">
+                <span><span class="talhao-dot" style="background: #00b4d8;"></span>Sul</span>
+                <span>420 ha</span>
+                <span>Milho</span>
+                <span><span class="status-badge ativo">Ativo</span></span>
+              </div>
+              <div class="talhoes-row">
+                <span><span class="talhao-dot" style="background: #8b5cf6;"></span>Leste</span>
+                <span>350 ha</span>
+                <span>Algodão</span>
+                <span><span class="status-badge ativo">Ativo</span></span>
+              </div>
+              <div class="talhoes-row">
+                <span><span class="talhao-dot" style="background: #f59e0b;"></span>Oeste</span>
+                <span>280 ha</span>
+                <span>Café</span>
+                <span><span class="status-badge pausa">Pausa</span></span>
+              </div>
+              <div class="talhoes-row">
+                <span><span class="talhao-dot" style="background: #ef4444;"></span>Central</span>
+                <span>820 ha</span>
+                <span>Cana</span>
+                <span><span class="status-badge ativo">Ativo</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="--card-accent: #10b981;">
+            <div class="card-header">
+              <div class="card-icon">
+                <i data-lucide="flask-conical" size="20"></i>
+              </div>
+              <span class="card-badge">Insumos</span>
+            </div>
+            <h3>Blend de Fertilizantes</h3>
+            <div class="fertilizantes-body">
+              <div class="fertilizante-item">
+                <div class="fertilizante-info">
+                  <span class="fertilizante-nome">Ureia (45% N)</span>
+                  <span class="fertilizante-valor">450 kg</span>
+                </div>
+                <div class="fertilizante-bar">
+                  <div class="fertilizante-fill" style="width: 100%; background: linear-gradient(90deg, #00e396, #00b87a);"></div>
+                </div>
+              </div>
+              <div class="fertilizante-item">
+                <div class="fertilizante-info">
+                  <span class="fertilizante-nome">Superfosfato Simples</span>
+                  <span class="fertilizante-valor">320 kg</span>
+                </div>
+                <div class="fertilizante-bar">
+                  <div class="fertilizante-fill" style="width: 71%; background: linear-gradient(90deg, #00b4d8, #0096b4);"></div>
+                </div>
+              </div>
+              <div class="fertilizante-item">
+                <div class="fertilizante-info">
+                  <span class="fertilizante-nome">Cloreto de Potássio (KCl)</span>
+                  <span class="fertilizante-valor">280 kg</span>
+                </div>
+                <div class="fertilizante-bar">
+                  <div class="fertilizante-fill" style="width: 62%; background: linear-gradient(90deg, #8b5cf6, #7c3aed);"></div>
+                </div>
+              </div>
+              <div class="fertilizante-total">
+                <span>Total do Blend</span>
+                <span><strong>1.050 kg/ha</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="--card-accent: #f43f5e;">
+            <div class="card-header">
+              <div class="card-icon">
+                <i data-lucide="binary" size="20"></i>
+              </div>
+              <span class="card-badge">Lógica</span>
+            </div>
+            <h3>Porta Lógica AND — Irrigação</h3>
+            <p class="card-desc">Sensor de umidade <strong>A</strong> e sensor de chuva <strong>B</strong></p>
+            <div class="porta-controls">
+              <div class="porta-input-group">
+                <label>
+                  <span class="porta-label">Entrada A</span>
+                  <span class="porta-label-desc">(Umidade do solo &lt; 30%)</span>
+                </label>
+                <div class="toggle-group">
+                  <button class="toggle-btn" data-input="a" data-value="0">0</button>
+                  <button class="toggle-btn active" data-input="a" data-value="1">1</button>
+                </div>
+              </div>
+              <div class="porta-input-group">
+                <label>
+                  <span class="porta-label">Entrada B</span>
+                  <span class="porta-label-desc">(Previsão de chuva &gt; 50%)</span>
+                </label>
+                <div class="toggle-group">
+                  <button class="toggle-btn" data-input="b" data-value="0">0</button>
+                  <button class="toggle-btn active" data-input="b" data-value="1">1</button>
+                </div>
+              </div>
+            </div>
+            <div class="porta-resultado">
+              <div class="porta-tabela">
+                <div class="porta-tabela-row header">
+                  <span>A</span>
+                  <span>B</span>
+                  <span>A AND B</span>
+                  <span>Irrigar?</span>
+                </div>
+                <div class="porta-tabela-row">
+                  <span>0</span>
+                  <span>0</span>
+                  <span>0</span>
+                  <span><i data-lucide="x-circle" size="16" style="color: #ef4444;"></i></span>
+                </div>
+                <div class="porta-tabela-row">
+                  <span>0</span>
+                  <span>1</span>
+                  <span>0</span>
+                  <span><i data-lucide="x-circle" size="16" style="color: #ef4444;"></i></span>
+                </div>
+                <div class="porta-tabela-row">
+                  <span>1</span>
+                  <span>0</span>
+                  <span>0</span>
+                  <span><i data-lucide="x-circle" size="16" style="color: #ef4444;"></i></span>
+                </div>
+                <div class="porta-tabela-row highlight" id="portaActiveRow">
+                  <span>1</span>
+                  <span>1</span>
+                  <span>1</span>
+                  <span><i data-lucide="check-circle" size="16" style="color: #00e396;"></i></span>
+                </div>
+              </div>
+              <div class="porta-decisao" id="portaDecisao">
+                <i data-lucide="droplets" size="20"></i>
+                <span>Ativar Irrigação</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
