@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgroCalc Web - Plataforma inteligente para o agronegócio" />
+  <title>AgroCalc Web - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Overlay para sidebar mobile -->
+  <div class="sidebar-overlay"></div>
+
+  <!-- Botão toggle sidebar mobile -->
+  <button class="sidebar-toggle" aria-label="Abrir menu">&#9776;</button>
+
+  <div class="app-wrapper">
+
+    <!-- ==========================================
+    SIDEBAR
+    ========================================== -->
+    <aside class="sidebar" role="navigation" aria-label="Navegação principal">
+
+      <!-- Logo -->
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">Agro<span>Calc</span></div>
+      </div>
+
+      <!-- Navegação -->
+      <nav class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+        <a href="index.html" class="active">
+          <span class="nav-icon">&#9632;</span>
+          Dashboard
+        </a>
+        <a href="custo.html">
+          <span class="nav-icon">&#36;</span>
+          Custos
+        </a>
+        <a href="financiamento.html">
+          <span class="nav-icon">&#9733;</span>
+          Financiamento
+        </a>
+
+        <div class="nav-label">Ferramentas</div>
+        <a href="conversor.html">
+          <span class="nav-icon">&#8644;</span>
+          Conversor
+        </a>
+        <a href="talhoes.html">
+          <span class="nav-icon">&#10070;</span>
+          Talhões
+        </a>
+        <a href="blend.html">
+          <span class="nav-icon">&#9670;</span>
+          Fertilizantes
+        </a>
+
+        <div class="nav-label">Sistema</div>
+        <a href="computacao.html">
+          <span class="nav-icon">&#9881;</span>
+          Computação
+          <span class="nav-badge">Novo</span>
+        </a>
+      </nav>
+
+      <!-- Footer da Sidebar -->
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">AC</div>
+          <div class="user-info">
+            <div class="user-name">AgroCalc</div>
+            <div class="user-role">Produtor Rural</div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ==========================================
+    CONTEÚDO PRINCIPAL
+    ========================================== -->
+    <main class="main-content">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="header-search">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" placeholder="Pesquisar no dashboard..." aria-label="Campo de pesquisa" />
+        </div>
+
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Alternar tema">&#x2600;&#xFE0F;</button>
+          <button class="notification-btn" aria-label="Notificações">
+            &#128276;
+            <span class="badge">3</span>
+          </button>
+          <div class="header-avatar" title="Perfil do produtor">AC</div>
+        </div>
+      </header>
+
+      <!-- ==========================================
+      DASHBOARD GRID
+      ========================================== -->
+      <div class="dashboard-grid">
+
+        <!-- Page Header -->
+        <section class="page-header fade-in">
+          <div class="breadcrumb">AgroCalc / <span>Dashboard</span></div>
+          <h1>Dashboard</h1>
+          <p>Visão geral da sua produção agrícola</p>
+        </section>
+
+        <!-- ==========================================
+        STATS CARDS
+        ========================================== -->
+        <section class="stats-grid fade-in delay-1" aria-label="Indicadores principais">
+
+          <article class="card stat-card slide-up delay-1">
+            <div class="card-header">
+              <h3>Produção Total</h3>
+              <div class="card-icon green">&#9783;</div>
+            </div>
+            <div class="stat-value">12.847 <span style="font-size:16px;color:var(--text-muted);">sacas</span></div>
+            <div class="stat-label">Últimos 12 meses</div>
+            <span class="stat-trend up">&#9650; +12,5%</span>
+          </article>
+
+          <article class="card stat-card slide-up delay-2">
+            <div class="card-header">
+              <h3>Lucro Estimado</h3>
+              <div class="card-icon teal">&#36;</div>
+            </div>
+            <div class="stat-value">R$ 487,5 <span style="font-size:16px;color:var(--text-muted);">mil</span></div>
+            <div class="stat-label">Margem líquida</div>
+            <span class="stat-trend up">&#9650; +8,3%</span>
+          </article>
+
+          <article class="card stat-card slide-up delay-3">
+            <div class="card-header">
+              <h3>Custos</h3>
+              <div class="card-icon amber">&#9888;</div>
+            </div>
+            <div class="stat-value">R$ 312,2 <span style="font-size:16px;color:var(--text-muted);">mil</span></div>
+            <div class="stat-label">Custos operacionais</div>
+            <span class="stat-trend down">&#9660; +3,1%</span>
+          </article>
+
+          <article class="card stat-card slide-up delay-4">
+            <div class="card-header">
+              <h3>Produtividade</h3>
+              <div class="card-icon purple">&#9733;</div>
+            </div>
+            <div class="stat-value">62,4 <span style="font-size:16px;color:var(--text-muted);">sc/ha</span></div>
+            <div class="stat-label">Média da safra</div>
+            <span class="stat-trend up">&#9650; +5,2%</span>
+          </article>
+
+        </section>
+
+        <!-- ==========================================
+        GRÁFICOS
+        ========================================== -->
+        <section class="charts-grid fade-in delay-3">
+
+          <!-- Gráfico de Barras -->
+          <article class="card">
+            <div class="chart-header">
+              <h3>Evolução da Produção</h3>
+              <div class="chart-legend">
+                <div class="chart-legend-item">
+                  <span class="chart-legend-dot green"></span>
+                  Produção (sacas)
+                </div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="chart-barras"></canvas>
+            </div>
+          </article>
+
+          <!-- Gráfico de Linha -->
+          <article class="card">
+            <div class="chart-header">
+              <h3>Receita x Despesas</h3>
+              <div class="chart-legend">
+                <div class="chart-legend-item">
+                  <span class="chart-legend-dot green"></span>
+                  Receita
+                </div>
+                <div class="chart-legend-item">
+                  <span class="chart-legend-dot" style="background:#ef4444;"></span>
+                  Despesas
+                </div>
+              </div>
+            </div>
+            <div class="chart-container chart-container-sm">
+              <canvas id="chart-linha"></canvas>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- ==========================================
+        BOTTOM GRID
+        ========================================== -->
+        <section class="bottom-grid fade-in delay-4">
+
+          <!-- Próximas Simulações -->
+          <article class="card">
+            <div class="card-header">
+              <h3>Próximas Simulações</h3>
+              <span class="tag tag-info">3 pendentes</span>
+            </div>
+            <div class="simulation-list">
+
+              <div class="simulation-item">
+                <div class="sim-icon green-bg">&#36;</div>
+                <div class="sim-info">
+                  <div class="sim-title">Custeio Safra Verão</div>
+                  <div class="sim-date">15 de Junho de 2026</div>
+                </div>
+                <span class="tag tag-success">Concluído</span>
+              </div>
+
+              <div class="simulation-item">
+                <div class="sim-icon purple-bg">&#9733;</div>
+                <div class="sim-info">
+                  <div class="sim-title">Financiamento Trator</div>
+                  <div class="sim-date">22 de Junho de 2026</div>
+                </div>
+                <span class="tag tag-warning">Pendente</span>
+              </div>
+
+              <div class="simulation-item">
+                <div class="sim-icon teal-bg">&#9670;</div>
+                <div class="sim-info">
+                  <div class="sim-title">Blend Fertilizantes NPK</div>
+                  <div class="sim-date">05 de Julho de 2026</div>
+                </div>
+                <span class="tag tag-warning">Pendente</span>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Resumo da Fazenda -->
+          <article class="card">
+            <div class="card-header">
+              <h3>Resumo da Fazenda</h3>
+              <span class="tag tag-success">Ativo</span>
+            </div>
+            <div class="farm-summary">
+
+              <div class="farm-summary-item">
+                <div class="farm-value">245 ha</div>
+                <div class="farm-label">Área Total</div>
+              </div>
+
+              <div class="farm-summary-item">
+                <div class="farm-value">12</div>
+                <div class="farm-label">Talhões</div>
+              </div>
+
+              <div class="farm-summary-item">
+                <div class="farm-value">4</div>
+                <div class="farm-label">Culturas</div>
+              </div>
+
+              <div class="farm-summary-item">
+                <div class="farm-value">92%</div>
+                <div class="farm-label">Área Ocupada</div>
+              </div>
+
+            </div>
+
+            <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:6px;">
+                <span>Soja</span>
+                <span>120 ha</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:6px;">
+                <span>Milho</span>
+                <span>65 ha</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:6px;">
+                <span>Café</span>
+                <span>35 ha</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);">
+                <span>Algodão</span>
+                <span>25 ha</span>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        &copy; 2026 <span>AgroCalc Web</span> &mdash; Tecnologia para o agronegócio
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- Container para Toast Notifications -->
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+
+</body>
+</html>

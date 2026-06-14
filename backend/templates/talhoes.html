@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}AgroCalc Web - Talhões{% endblock %}
+{% block nav_talhoes %}active{% endblock %}
+
+{% block content %}
+<section class="page-header fade-in">
+  <div class="breadcrumb">AgroCalc / <span>Mapa de Talhões</span></div>
+  <h1>Mapa de Talhões</h1>
+  <p>Visualize e gerencie os talhões da sua propriedade</p>
+</section>
+
+<section class="talhoes-layout fade-in delay-1">
+  <article class="card">
+    <div class="card-header">
+      <h3>&#127758; Visualização do Terreno</h3>
+      <div style="display:flex;gap:8px;">
+        <span class="tag tag-success">Soja</span>
+        <span class="tag tag-info">Milho</span>
+        <span class="tag tag-info" style="background:rgba(139,92,246,0.12);color:#8B5CF6;">Café</span>
+        <span class="tag tag-warning">Algodão</span>
+      </div>
+    </div>
+    <div class="mapa-container">
+      <div class="mapa-grid" id="mapa-grid"></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-header">
+      <h3>&#128196; Detalhes do Talhão</h3>
+    </div>
+    <form id="talhao-form">
+      <input type="hidden" id="talhao-id" value="" />
+      <div class="form-group">
+        <label for="talhao-nome">Nome do Talhão</label>
+        <input type="text" id="talhao-nome" class="form-control" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="talhao-area">Área (ha)</label>
+          <input type="number" id="talhao-area" class="form-control" min="0" step="0.1" />
+        </div>
+        <div class="form-group">
+          <label for="talhao-cultura">Cultura</label>
+          <select id="talhao-cultura" class="form-control">
+            <option value="soja">Soja</option>
+            <option value="milho">Milho</option>
+            <option value="cafe">Café</option>
+            <option value="algodao">Algodão</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="talhao-status">Status</label>
+        <select id="talhao-status" class="form-control">
+          <option value="ok">OK - Plantio ativo</option>
+          <option value="atencao">Atenção - Necessita manejo</option>
+          <option value="pousio">Pousio - Em descanso</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="talhao-previsao">Previsão de Colheita</label>
+          <input type="text" id="talhao-previsao" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="talhao-produtividade">Produtividade (sc/ha)</label>
+          <input type="number" id="talhao-produtividade" class="form-control" min="0" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-full">&#128190; Salvar Alterações</button>
+    </form>
+  </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const CULTURA_CORES = {
+  soja: { bg: 'rgba(0,208,132,0.2)', color: 'var(--cor-primaria)', label: 'Soja' },
+  milho: { bg: 'rgba(45,212,191,0.2)', color: 'var(--cor-secundaria)', label: 'Milho' },
+  cafe: { bg: 'rgba(139,92,246,0.2)', color: '#8B5CF6', label: 'Café' },
+  algodao: { bg: 'rgba(251,191,36,0.2)', color: '#fbbf24', label: 'Algodão' },
+}
+
+async function carregarTalhoes() {
+  const res = await fetch('/api/talhoes')
+  const data = await res.json()
+  const grid = document.getElementById('mapa-grid')
+  grid.innerHTML = data.talhoes.map(t => {
+    const c = CULTURA_CORES[t.cultura] || CULTURA_CORES.soja
+    return `<div class="talhao-cell cultura-${t.cultura}" data-id="${t.id}">
+      <span class="talhao-status ${t.status}"></span>
+      <div class="talhao-name">${t.nome}</div>
+      <div class="talhao-area">${t.area} ha</div>
+      <span class="talhao-cultura" style="background:${c.bg};color:${c.color};">${c.label}</span>
+    </div>`
+  }).join('')
+
+  document.querySelectorAll('.talhao-cell').forEach(cell => {
+    cell.addEventListener('click', function() {
+      document.querySelectorAll('.talhao-cell').forEach(c => c.classList.remove('active'))
+      this.classList.add('active')
+      const id = this.dataset.id
+      carregarTalhao(id)
+    })
+  })
+}
+
+async function carregarTalhao(id) {
+  const res = await fetch(`/api/talhoes/${id}`)
+  const t = await res.json()
+  document.getElementById('talhao-id').value = t.id
+  document.getElementById('talhao-nome').value = t.nome
+  document.getElementById('talhao-area').value = t.area
+  document.getElementById('talhao-cultura').value = t.cultura
+  document.getElementById('talhao-status').value = t.status
+  document.getElementById('talhao-previsao').value = t.previsao_colheita || ''
+  document.getElementById('talhao-produtividade').value = t.produtividade || ''
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  carregarTalhoes()
+
+  document.getElementById('talhao-form').addEventListener('submit', async function(e) {
+    e.preventDefault()
+    const id = document.getElementById('talhao-id').value
+    const dados = {
+      nome: document.getElementById('talhao-nome').value,
+      area: parseFloat(document.getElementById('talhao-area').value),
+      cultura: document.getElementById('talhao-cultura').value,
+      status: document.getElementById('talhao-status').value,
+      previsao_colheita: document.getElementById('talhao-previsao').value,
+      produtividade: parseFloat(document.getElementById('talhao-produtividade').value) || 0,
+    }
+
+    const url = id ? `/api/talhoes/${id}` : '/api/talhoes'
+    const method = id ? 'PUT' : 'POST'
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+      })
+      if (res.ok) {
+        AgroCalc.showToast('Talhão salvo com sucesso!', 'success')
+        carregarTalhoes()
+      } else {
+        const err = await res.json()
+        AgroCalc.showToast(err.erro || 'Erro ao salvar', 'error')
+      }
+    } catch (err) {
+      AgroCalc.showToast('Erro de conexão', 'error')
+    }
+  })
+})
+</script>
+{% endblock %}

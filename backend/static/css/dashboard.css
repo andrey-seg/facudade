@@ -1,0 +1,668 @@
+/* ============================================
+   AgroCalc Web - Estilos Específicos do Dashboard
+   Gráficos, containers e componentes do dashboard
+   ============================================ */
+
+/* --- Chart Container --- */
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-container-sm {
+  height: 220px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.chart-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.chart-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.chart-legend-dot.green {
+  background: var(--cor-primaria);
+}
+
+.chart-legend-dot.teal {
+  background: var(--cor-secundaria);
+}
+
+.chart-legend-dot.purple {
+  background: var(--cor-destaque);
+}
+
+/* --- Tooltip Chart --- */
+.chart-tooltip {
+  position: absolute;
+  padding: 8px 12px;
+  border-radius: var(--radius-xs);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  font-size: 12px;
+  color: var(--text-primary);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.chart-tooltip.show {
+  opacity: 1;
+}
+
+/* --- Próximas Simulações Card --- */
+.simulation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.simulation-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  transition: background var(--transition);
+  cursor: pointer;
+}
+
+.simulation-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.simulation-item .sim-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.simulation-item .sim-icon.green-bg {
+  background: rgba(0, 208, 132, 0.12);
+}
+
+.simulation-item .sim-icon.purple-bg {
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.simulation-item .sim-icon.teal-bg {
+  background: rgba(45, 212, 191, 0.12);
+}
+
+.simulation-item .sim-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.simulation-item .sim-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.simulation-item .sim-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.simulation-item .sim-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* --- Resumo da Fazenda Card --- */
+.farm-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.farm-summary-item {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  text-align: center;
+}
+
+.farm-summary-item .farm-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.farm-summary-item .farm-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   Página: Calculadora de Custos
+   ============================================ */
+.custo-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.custo-resultados {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.resultado-card {
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+}
+
+.resultado-card .result-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--cor-primaria);
+  margin-bottom: 4px;
+}
+
+.resultado-card .result-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.resultado-card.destaque {
+  background: rgba(0, 208, 132, 0.06);
+  border-color: rgba(0, 208, 132, 0.2);
+}
+
+.resultado-card.destaque .result-value {
+  color: var(--cor-primaria);
+}
+
+.resultado-card.purple {
+  background: rgba(139, 92, 246, 0.06);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.resultado-card.purple .result-value {
+  color: var(--cor-destaque);
+}
+
+.resultado-card.teal {
+  background: rgba(45, 212, 191, 0.06);
+  border-color: rgba(45, 212, 191, 0.2);
+}
+
+.resultado-card.teal .result-value {
+  color: var(--cor-secundaria);
+}
+
+/* ============================================
+   Página: Financiamento
+   ============================================ */
+.financiamento-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.financiamento-tabela {
+  margin-top: 20px;
+}
+
+.parcela-destaque {
+  background: rgba(0, 208, 132, 0.04) !important;
+}
+
+.parcela-total {
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+.financiamento-resumo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.fin-resumo-item {
+  text-align: center;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.fin-resumo-item .fin-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fin-resumo-item .fin-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.fin-resumo-item .fin-value.green {
+  color: var(--cor-primaria);
+}
+
+.fin-resumo-item .fin-value.purple {
+  color: var(--cor-destaque);
+}
+
+/* ============================================
+   Página: Conversor
+   ============================================ */
+.conversor-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.conversor-input-group {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.conversor-input-group .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.conversor-result {
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 208, 132, 0.04);
+  border: 1px solid rgba(0, 208, 132, 0.2);
+  text-align: center;
+  margin-top: 16px;
+}
+
+.conversor-result .conv-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.conversor-result .conv-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--cor-primaria);
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+}
+
+.conversor-history {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 6px;
+  font-size: 13px;
+  transition: background var(--transition);
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.history-item .h-value {
+  font-family: 'Courier New', monospace;
+  color: var(--cor-primaria);
+  font-weight: 600;
+}
+
+.history-item .h-base {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.history-item .h-time {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* ============================================
+   Página: Talhões (Mapa)
+   ============================================ */
+.talhoes-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.mapa-container {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.mapa-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px;
+  height: 100%;
+  min-height: 500px;
+}
+
+.talhao-cell {
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 2px solid transparent;
+  min-height: 100px;
+  position: relative;
+}
+
+.talhao-cell:hover {
+  transform: scale(1.03);
+  border-color: var(--cor-primaria);
+}
+
+.talhao-cell.active {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 20px rgba(0, 208, 132, 0.2);
+}
+
+.talhao-cell .talhao-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.talhao-cell .talhao-area {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.talhao-cell .talhao-cultura {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+.talhao-cell .talhao-status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.talhao-cell .talhao-status.ok {
+  background: var(--cor-primaria);
+}
+
+.talhao-cell .talhao-status.warn {
+  background: #fbbf24;
+}
+
+.talhao-cell.cultura-soja {
+  background: rgba(0, 208, 132, 0.1);
+}
+
+.talhao-cell.cultura-milho {
+  background: rgba(45, 212, 191, 0.1);
+}
+
+.talhao-cell.cultura-cafe {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.talhao-cell.cultura-algodao {
+  background: rgba(251, 191, 36, 0.1);
+}
+
+/* ============================================
+   Página: Blend de Fertilizantes
+   ============================================ */
+.blend-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.blend-slider {
+  width: 100%;
+  height: 6px;
+  appearance: none;
+  background: var(--border);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.blend-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cor-primaria);
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 208, 132, 0.3);
+  transition: box-shadow var(--transition);
+}
+
+.blend-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 20px rgba(0, 208, 132, 0.5);
+}
+
+.blend-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cor-primaria);
+  cursor: pointer;
+  border: none;
+}
+
+.blend-bar {
+  display: flex;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.blend-bar .blend-bar-segment {
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  min-width: 30px;
+}
+
+.blend-nutrient-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.nutrient-card {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.nutrient-card .n-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--cor-primaria);
+}
+
+.nutrient-card .n-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============================================
+   Página: Computação
+   ============================================ */
+.computacao-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.comp-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.comp-info-item {
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+}
+
+.comp-info-item .comp-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.comp-info-item .comp-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.comp-info-item .comp-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.comp-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.comp-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.comp-bar-fill.purple {
+  background: linear-gradient(90deg, var(--cor-destaque), #a78bfa);
+}
+
+.comp-log {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.comp-log-entry {
+  padding: 8px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background var(--transition);
+}
+
+.comp-log-entry:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.comp-log-entry .log-time {
+  color: var(--text-muted);
+  margin-right: 8px;
+}
+
+.comp-log-entry .log-ok {
+  color: var(--cor-primaria);
+}
+
+.comp-log-entry .log-info {
+  color: var(--cor-destaque);
+}
+
+.comp-log-entry .log-warn {
+  color: #fbbf24;
+}

@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}AgroCalc Web - Dashboard{% endblock %}
+{% block nav_dashboard %}active{% endblock %}
+
+{% block content %}
+<section class="page-header fade-in">
+  <div class="breadcrumb">AgroCalc / <span>Dashboard</span></div>
+  <h1>Dashboard</h1>
+  <p>Visão geral da sua produção agrícola</p>
+</section>
+
+<section class="stats-grid fade-in delay-1" aria-label="Indicadores principais" id="stats-container">
+  <article class="card stat-card slide-up delay-1">
+    <div class="card-header">
+      <h3>Produção Total</h3>
+      <div class="card-icon green">&#9783;</div>
+    </div>
+    <div class="stat-value" id="stat-producao">-- <span style="font-size:16px;color:var(--text-muted);">sacas</span></div>
+    <div class="stat-label">Últimos 12 meses</div>
+    <span class="stat-trend up">&#9650; +12,5%</span>
+  </article>
+  <article class="card stat-card slide-up delay-2">
+    <div class="card-header">
+      <h3>Lucro Estimado</h3>
+      <div class="card-icon teal">&#36;</div>
+    </div>
+    <div class="stat-value" id="stat-lucro">--</div>
+    <div class="stat-label">Margem líquida</div>
+    <span class="stat-trend up">&#9650; +8,3%</span>
+  </article>
+  <article class="card stat-card slide-up delay-3">
+    <div class="card-header">
+      <h3>Custos</h3>
+      <div class="card-icon amber">&#9888;</div>
+    </div>
+    <div class="stat-value" id="stat-custos">--</div>
+    <div class="stat-label">Custos operacionais</div>
+    <span class="stat-trend down">&#9660; +3,1%</span>
+  </article>
+  <article class="card stat-card slide-up delay-4">
+    <div class="card-header">
+      <h3>Produtividade</h3>
+      <div class="card-icon purple">&#9733;</div>
+    </div>
+    <div class="stat-value" id="stat-produtividade">-- <span style="font-size:16px;color:var(--text-muted);">sc/ha</span></div>
+    <div class="stat-label">Média da safra</div>
+    <span class="stat-trend up">&#9650; +5,2%</span>
+  </article>
+</section>
+
+<section class="charts-grid fade-in delay-3">
+  <article class="card">
+    <div class="chart-header">
+      <h3>Evolução da Produção</h3>
+      <div class="chart-legend">
+        <div class="chart-legend-item">
+          <span class="chart-legend-dot green"></span>
+          Produção (sacas)
+        </div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="chart-barras"></canvas>
+    </div>
+  </article>
+  <article class="card">
+    <div class="chart-header">
+      <h3>Receita x Despesas</h3>
+      <div class="chart-legend">
+        <div class="chart-legend-item">
+          <span class="chart-legend-dot green"></span>
+          Receita
+        </div>
+        <div class="chart-legend-item">
+          <span class="chart-legend-dot" style="background:#ef4444;"></span>
+          Despesas
+        </div>
+      </div>
+    </div>
+    <div class="chart-container chart-container-sm">
+      <canvas id="chart-linha"></canvas>
+    </div>
+  </article>
+</section>
+
+<section class="bottom-grid fade-in delay-4">
+  <article class="card">
+    <div class="card-header">
+      <h3>Próximas Simulações</h3>
+      <span class="tag tag-info">3 pendentes</span>
+    </div>
+    <div class="simulation-list">
+      <div class="simulation-item">
+        <div class="sim-icon green-bg">&#36;</div>
+        <div class="sim-info">
+          <div class="sim-title">Custeio Safra Verão</div>
+          <div class="sim-date">15 de Junho de 2026</div>
+        </div>
+        <span class="tag tag-success">Concluído</span>
+      </div>
+      <div class="simulation-item">
+        <div class="sim-icon purple-bg">&#9733;</div>
+        <div class="sim-info">
+          <div class="sim-title">Financiamento Trator</div>
+          <div class="sim-date">22 de Junho de 2026</div>
+        </div>
+        <span class="tag tag-warning">Pendente</span>
+      </div>
+      <div class="simulation-item">
+        <div class="sim-icon teal-bg">&#9670;</div>
+        <div class="sim-info">
+          <div class="sim-title">Blend Fertilizantes NPK</div>
+          <div class="sim-date">05 de Julho de 2026</div>
+        </div>
+        <span class="tag tag-warning">Pendente</span>
+      </div>
+    </div>
+  </article>
+  <article class="card">
+    <div class="card-header">
+      <h3>Resumo da Fazenda</h3>
+      <span class="tag tag-success">Ativo</span>
+    </div>
+    <div class="farm-summary" id="farm-summary">
+      <div class="farm-summary-item">
+        <div class="farm-value" id="farm-area">--</div>
+        <div class="farm-label">Área Total</div>
+      </div>
+      <div class="farm-summary-item">
+        <div class="farm-value" id="farm-talhoes">--</div>
+        <div class="farm-label">Talhões</div>
+      </div>
+      <div class="farm-summary-item">
+        <div class="farm-value" id="farm-culturas">--</div>
+        <div class="farm-label">Culturas</div>
+      </div>
+      <div class="farm-summary-item">
+        <div class="farm-value" id="farm-ocupacao">--</div>
+        <div class="farm-label">Área Ocupada</div>
+      </div>
+    </div>
+    <div id="culturas-detalhes" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);"></div>
+  </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  try {
+    const res = await fetch('/api/dashboard')
+    const data = await res.json()
+
+    document.getElementById('stat-producao').innerHTML = AgroCalc.formatNumber(data.producao_total_sacas) + ' <span style="font-size:16px;color:var(--text-muted);">sacas</span>'
+    document.getElementById('stat-lucro').textContent = AgroCalc.formatCurrency(data.lucro_estimado)
+    document.getElementById('stat-custos').textContent = AgroCalc.formatCurrency(data.custos_operacionais)
+    document.getElementById('stat-produtividade').innerHTML = data.produtividade_media_sc_ha + ' <span style="font-size:16px;color:var(--text-muted);">sc/ha</span>'
+
+    document.getElementById('farm-area').textContent = data.area_total_ha + ' ha'
+    document.getElementById('farm-talhoes').textContent = data.total_talhoes
+    document.getElementById('farm-culturas').textContent = data.qtd_culturas
+    document.getElementById('farm-ocupacao').textContent = data.area_ocupada_percentual + '%'
+
+    const culturasDiv = document.getElementById('culturas-detalhes')
+    culturasDiv.innerHTML = Object.entries(data.culturas || {}).map(([cultura, info]) =>
+      `<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:6px;">
+        <span style="text-transform:capitalize;">${cultura}</span>
+        <span>${info.area_ha} ha</span>
+      </div>`
+    ).join('')
+  } catch (err) {
+    AgroCalc.showToast('Erro ao carregar dashboard', 'error')
+  }
+})
+</script>
+{% endblock %}

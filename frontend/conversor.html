@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgroCalc Web - Conversor de Bases e Simulador AND" />
+  <title>AgroCalc Web - Conversor</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+  <button class="sidebar-toggle" aria-label="Abrir menu">&#9776;</button>
+
+  <div class="app-wrapper">
+
+    <aside class="sidebar" role="navigation" aria-label="Navegação principal">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">Agro<span>Calc</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+        <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+        <a href="custo.html"><span class="nav-icon">&#36;</span> Custos</a>
+        <a href="financiamento.html"><span class="nav-icon">&#9733;</span> Financiamento</a>
+        <div class="nav-label">Ferramentas</div>
+        <a href="conversor.html" class="active"><span class="nav-icon">&#8644;</span> Conversor</a>
+        <a href="talhoes.html"><span class="nav-icon">&#10070;</span> Talhões</a>
+        <a href="blend.html"><span class="nav-icon">&#9670;</span> Fertilizantes</a>
+        <div class="nav-label">Sistema</div>
+        <a href="computacao.html"><span class="nav-icon">&#9881;</span> Computação <span class="nav-badge">Novo</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">AC</div>
+          <div class="user-info">
+            <div class="user-name">AgroCalc</div>
+            <div class="user-role">Produtor Rural</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="header">
+        <div class="header-search">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar" />
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Alternar tema">&#x2600;&#xFE0F;</button>
+          <button class="notification-btn" aria-label="Notificações">&#128276;<span class="badge">3</span></button>
+          <div class="header-avatar">AC</div>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+
+        <section class="page-header fade-in">
+          <div class="breadcrumb">AgroCalc / <span>Conversor</span></div>
+          <h1>Conversor de Bases e Simulador AND</h1>
+          <p>Converta números entre bases e simule a porta lógica AND</p>
+        </section>
+
+        <!-- CONVERSOR -->
+        <section class="conversor-layout fade-in delay-1">
+
+          <article class="card">
+            <div class="card-header">
+              <h3>&#8644; Conversor de Bases</h3>
+            </div>
+
+            <form id="conversor-form">
+              <div class="form-group">
+                <label for="conv-input">Valor</label>
+                <input type="text" id="conv-input" class="form-control" placeholder="Ex: 175" autocomplete="off" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="conv-from">Base de Origem</label>
+                  <select id="conv-from" class="form-control">
+                    <option value="10" selected>Decimal</option>
+                    <option value="2">Binário</option>
+                    <option value="16">Hexadecimal</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="conv-to">Base de Destino</label>
+                  <select id="conv-to" class="form-control">
+                    <option value="2" selected>Binário</option>
+                    <option value="10">Decimal</option>
+                    <option value="16">Hexadecimal</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-full">
+                &#8644; Converter
+              </button>
+            </form>
+
+            <div id="conv-result" style="display:none;" class="conversor-result"></div>
+
+            <!-- Passo a passo -->
+            <div id="conv-steps" style="display:none; margin-top:16px;"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128214; Histórico de Conversões</h3>
+              <button class="btn btn-secondary btn-sm" id="conv-clear">Limpar</button>
+            </div>
+            <div class="conversor-history" id="conv-history">
+              <div class="empty-state">
+                <div class="empty-icon">&#128203;</div>
+                <h3>Nenhuma conversão ainda</h3>
+                <p>As conversões realizadas aparecerão aqui</p>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- SIMULADOR AND -->
+        <section class="fade-in delay-2">
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128268; Simulador AND — Irrigar?</h3>
+              <span class="tag tag-info">Lógica</span>
+            </div>
+
+            <p style="color:var(--text-secondary);margin-bottom:20px;font-size:14px;">
+              A irrigação será ligada apenas se a <strong>umidade do solo</strong> estiver adequada
+              <strong style="color:var(--cor-primaria);">E</strong> a <strong>temperatura ambiente</strong>
+              estiver adequada. Use a tabela abaixo para simular as condições:
+            </p>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+              <div class="form-group" style="margin:0;">
+                <label>Umidade Adequada?</label>
+                <select id="and-umidade" class="form-control">
+                  <option value="0">NÃO (0)</option>
+                  <option value="1" selected>SIM (1)</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin:0;">
+                <label>Temperatura Adequada?</label>
+                <select id="and-temperatura" class="form-control">
+                  <option value="0">NÃO (0)</option>
+                  <option value="1" selected>SIM (1)</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="btn-and-simular" class="btn btn-primary btn-lg w-full">
+              &#128200; Simular Irrigação
+            </button>
+
+            <!-- Resultado AND -->
+            <div id="and-resultado" style="display:none;margin-top:20px;padding:20px;border-radius:var(--radius-sm);text-align:center;font-size:20px;font-weight:700;"></div>
+
+            <!-- Tabela verdade -->
+            <div style="margin-top:24px;">
+              <h4 style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:12px;">Tabela Verdade AND</h4>
+              <div class="table-container">
+                <table id="and-tabela-verdade">
+                  <thead>
+                    <tr>
+                      <th>Umidade</th>
+                      <th>Temperatura</th>
+                      <th>Umidade AND Temperatura</th>
+                      <th>Irrigar?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="and-row-00"><td>NÃO (0)</td><td>NÃO (0)</td><td>0</td><td><span class="tag">NÃO</span></td></tr>
+                    <tr id="and-row-01"><td>NÃO (0)</td><td>SIM (1)</td><td>0</td><td><span class="tag">NÃO</span></td></tr>
+                    <tr id="and-row-10"><td>SIM (1)</td><td>NÃO (0)</td><td>0</td><td><span class="tag">NÃO</span></td></tr>
+                    <tr id="and-row-11"><td>SIM (1)</td><td>SIM (1)</td><td>1</td><td><span class="tag tag-success">SIM</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </section>
+
+      </div>
+
+      <footer class="app-footer">
+        &copy; 2026 <span>AgroCalc Web</span> &mdash; Tecnologia para o agronegócio
+      </footer>
+
+    </main>
+
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/conversor.js"></script>
+
+</body>
+</html>

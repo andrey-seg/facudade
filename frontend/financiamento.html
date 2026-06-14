@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgroCalc Web - Simulador de Financiamento Agrícola" />
+  <title>AgroCalc Web - Financiamento</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+  <button class="sidebar-toggle" aria-label="Abrir menu">&#9776;</button>
+
+  <div class="app-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" role="navigation" aria-label="Navegação principal">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">Agro<span>Calc</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+        <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+        <a href="custo.html"><span class="nav-icon">&#36;</span> Custos</a>
+        <a href="financiamento.html" class="active"><span class="nav-icon">&#9733;</span> Financiamento</a>
+        <div class="nav-label">Ferramentas</div>
+        <a href="conversor.html"><span class="nav-icon">&#8644;</span> Conversor</a>
+        <a href="talhoes.html"><span class="nav-icon">&#10070;</span> Talhões</a>
+        <a href="blend.html"><span class="nav-icon">&#9670;</span> Fertilizantes</a>
+        <div class="nav-label">Sistema</div>
+        <a href="computacao.html"><span class="nav-icon">&#9881;</span> Computação <span class="nav-badge">Novo</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">AC</div>
+          <div class="user-info">
+            <div class="user-name">AgroCalc</div>
+            <div class="user-role">Produtor Rural</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <main class="main-content">
+
+      <header class="header">
+        <div class="header-search">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar" />
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Alternar tema">&#x2600;&#xFE0F;</button>
+          <button class="notification-btn" aria-label="Notificações">&#128276;<span class="badge">3</span></button>
+          <div class="header-avatar">AC</div>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+
+        <section class="page-header fade-in">
+          <div class="breadcrumb">AgroCalc / <span>Financiamento Agrícola</span></div>
+          <h1>Financiamento Agrícola</h1>
+          <p>Simule financiamentos com o sistema Price (PMT)</p>
+        </section>
+
+        <section class="financiamento-layout fade-in delay-1">
+
+          <!-- Formulário -->
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128176; Dados do Financiamento</h3>
+            </div>
+
+            <form id="fin-form">
+
+              <div class="form-group">
+                <label for="fin-valor">Valor Financiado (R$)</label>
+                <input type="number" id="fin-valor" class="form-control" placeholder="Ex: 500000" min="0" required />
+                <div class="form-hint">Valor total que será financiado</div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fin-taxa">Taxa de Juros (% ao mês)</label>
+                  <input type="number" id="fin-taxa" class="form-control" placeholder="Ex: 1,0" min="0" step="0.01" required />
+                  <div class="form-hint">Ex: 1,0 para 1% ao mês</div>
+                </div>
+                <div class="form-group">
+                  <label for="fin-parcelas">Número de Parcelas</label>
+                  <input type="number" id="fin-parcelas" class="form-control" placeholder="Ex: 60" min="1" required />
+                  <div class="form-hint">Quantidade de meses</div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+                &#128200; Simular Financiamento
+              </button>
+
+            </form>
+          </article>
+
+          <!-- Resultados -->
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128202; Resultados</h3>
+            </div>
+
+            <div class="financiamento-resumo" id="fin-resumo" style="display:none;">
+              <div class="fin-resumo-item" style="border:1px solid rgba(0,208,132,0.3);background:rgba(0,208,132,0.04);">
+                <div class="fin-value" id="fin-parcela">R$ 0,00</div>
+                <div class="fin-label">Valor da Parcela</div>
+              </div>
+              <div class="fin-resumo-item" style="border:1px solid rgba(0,208,132,0.3);background:rgba(0,208,132,0.04);">
+                <div class="fin-value green" id="fin-total-pago">R$ 0,00</div>
+                <div class="fin-label">Total Pago</div>
+              </div>
+              <div class="fin-resumo-item" style="border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.04);">
+                <div class="fin-value purple" id="fin-total-juros">R$ 0,00</div>
+                <div class="fin-label">Total em Juros</div>
+              </div>
+            </div>
+
+            <!-- Chart -->
+            <div id="fin-chart-container" style="display:none; margin-bottom:20px;">
+              <div class="chart-header">
+                <h3>Composição das Parcelas</h3>
+                <div class="chart-legend">
+                  <div class="chart-legend-item">
+                    <span class="chart-legend-dot" style="background:#00D084;"></span>
+                    Amortização
+                  </div>
+                  <div class="chart-legend-item">
+                    <span class="chart-legend-dot" style="background:#8B5CF6;"></span>
+                    Juros
+                  </div>
+                </div>
+              </div>
+              <div class="chart-container chart-container-sm">
+                <canvas id="fin-chart"></canvas>
+              </div>
+            </div>
+
+            <!-- Tabela -->
+            <div class="financiamento-tabela" id="fin-tabela">
+              <div class="empty-state">
+                <div class="empty-icon">&#128202;</div>
+                <h3>Nenhuma simulação ainda</h3>
+                <p>Preencha os dados ao lado e clique em "Simular Financiamento"</p>
+              </div>
+            </div>
+
+            <!-- Botão Exportar CSV -->
+            <div id="fin-export-area" style="display:none; margin-top:16px; text-align:right;">
+              <button id="btn-export-csv" class="btn btn-secondary">
+                &#128230; Exportar CSV
+              </button>
+            </div>
+
+          </article>
+
+        </section>
+
+      </div>
+
+      <footer class="app-footer">
+        &copy; 2026 <span>AgroCalc Web</span> &mdash; Tecnologia para o agronegócio
+      </footer>
+
+    </main>
+
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/simulador.js"></script>
+
+</body>
+</html>

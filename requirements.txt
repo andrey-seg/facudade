@@ -1,0 +1,6 @@
+Flask>=3.0
+Flask-Cors>=5.0
+NumPy>=2.0
+Pandas>=2.0
+Matplotlib>=3.5
+gunicorn>=23.0

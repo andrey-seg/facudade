@@ -1,0 +1,41 @@
+[2026-06-12 15:37:27] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:37:27] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:37:34] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:37:34] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:37:34] INFO - backend.routes.custo_routes - Custos calculados para área 100.00 ha
+[2026-06-12 15:37:34] INFO - backend.routes.financiamento_routes - Financiamento simulado: R$ 500000.00 em 5 anos
+[2026-06-12 15:37:34] INFO - backend.routes.conversor_routes - Conversão: 255 base 10 -> FF base 16
+[2026-06-12 15:37:34] WARNING - backend.routes.custo_routes - Validação de custo falhou: ['sementes é obrigatório', 'fertilizantes é obrigatório', 'defensivos é obrigatório', 'mao_obra é obrigatório', 'irrigacao é obrigatório', 'transporte é obrigatório', 'outros é obrigatório', 'Área deve ser maior que zero']
+[2026-06-12 15:37:50] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:37:50] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:37:50] INFO - backend.routes.blend_routes - Blend calculado: Teste - NPK (20-30-50)
+[2026-06-12 15:37:50] INFO - backend.routes.talhoes_routes - Talhão atualizado: Talhão A1 (ID 1)
+[2026-06-12 15:44:28] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:44:28] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 15:44:28] INFO - backend.routes.custo_producao_routes - Custo de produção calculado: CF=50000.00, CV=80.00, x=1000.00, p=150.00
+[2026-06-12 16:00:09] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:00:09] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:00:09] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:00:09] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:00:09] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:00:09] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:00:09] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:00:09] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:01:02] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:01:02] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:01:02] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:01:02] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:01:02] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:01:02] INFO - backend.app - Logging configurado com sucesso
+[2026-06-12 16:01:02] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:01:02] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-12 16:01:04] INFO - backend.routes.blend_routes - Blend resolvido: N=100.0 P=50.0 K=80.0
+[2026-06-14 16:39:00] INFO - backend.app - Logging configurado com sucesso
+[2026-06-14 16:39:00] INFO - backend.app - Logging configurado com sucesso
+[2026-06-14 16:39:00] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-14 16:39:00] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-14 16:39:00] INFO - backend.app - Logging configurado com sucesso
+[2026-06-14 16:39:00] INFO - backend.app - Logging configurado com sucesso
+[2026-06-14 16:39:00] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-14 16:39:00] INFO - backend.app - Iniciando AgroCalc Web na porta 5000 (debug=True)
+[2026-06-14 16:41:51] INFO - backend.routes.blend_routes - Blend calculado: Blend Premium Soja - NPK (55-12-91)

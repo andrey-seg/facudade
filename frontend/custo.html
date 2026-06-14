@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgroCalc Web - Calculadora de Custos Agrícolas" />
+  <title>AgroCalc Web - Custos</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+  <button class="sidebar-toggle" aria-label="Abrir menu">&#9776;</button>
+
+  <div class="app-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" role="navigation" aria-label="Navegação principal">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">Agro<span>Calc</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+        <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+        <a href="custo.html" class="active"><span class="nav-icon">&#36;</span> Custos</a>
+        <a href="financiamento.html"><span class="nav-icon">&#9733;</span> Financiamento</a>
+        <div class="nav-label">Ferramentas</div>
+        <a href="conversor.html"><span class="nav-icon">&#8644;</span> Conversor</a>
+        <a href="talhoes.html"><span class="nav-icon">&#10070;</span> Talhões</a>
+        <a href="blend.html"><span class="nav-icon">&#9670;</span> Fertilizantes</a>
+        <div class="nav-label">Sistema</div>
+        <a href="computacao.html"><span class="nav-icon">&#9881;</span> Computação <span class="nav-badge">Novo</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">AC</div>
+          <div class="user-info">
+            <div class="user-name">AgroCalc</div>
+            <div class="user-role">Produtor Rural</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <main class="main-content">
+
+      <header class="header">
+        <div class="header-search">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar" />
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Alternar tema">&#x2600;&#xFE0F;</button>
+          <button class="notification-btn" aria-label="Notificações">&#128276;<span class="badge">3</span></button>
+          <div class="header-avatar">AC</div>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+
+        <section class="page-header fade-in">
+          <div class="breadcrumb">AgroCalc / <span>Calculadora de Custos</span></div>
+          <h1>Calculadora de Custos</h1>
+          <p>Simule os custos operacionais da sua produção agrícola</p>
+        </section>
+
+        <section class="custo-layout fade-in delay-1">
+
+          <!-- Formulário -->
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128202; Dados da Propriedade</h3>
+            </div>
+
+            <form id="custo-form">
+
+              <div class="form-group">
+                <label for="custo-area">Área Cultivada (hectares)</label>
+                <input type="number" id="custo-area" class="form-control" placeholder="Ex: 100" min="0" step="0.1" required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="custo-sementes">Sementes (R$)</label>
+                  <input type="number" id="custo-sementes" class="form-control" placeholder="0" min="0" />
+                </div>
+                <div class="form-group">
+                  <label for="custo-fertilizantes">Fertilizantes (R$)</label>
+                  <input type="number" id="custo-fertilizantes" class="form-control" placeholder="0" min="0" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="custo-defensivos">Defensivos (R$)</label>
+                  <input type="number" id="custo-defensivos" class="form-control" placeholder="0" min="0" />
+                </div>
+                <div class="form-group">
+                  <label for="custo-mao-obra">Mão de Obra (R$)</label>
+                  <input type="number" id="custo-mao-obra" class="form-control" placeholder="0" min="0" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="custo-irrigacao">Irrigação (R$)</label>
+                  <input type="number" id="custo-irrigacao" class="form-control" placeholder="0" min="0" />
+                </div>
+                <div class="form-group">
+                  <label for="custo-transporte">Transporte (R$)</label>
+                  <input type="number" id="custo-transporte" class="form-control" placeholder="0" min="0" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="custo-outros">Outros Custos (R$)</label>
+                <input type="number" id="custo-outros" class="form-control" placeholder="0" min="0" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="custo-produtividade">Produtividade (sc/ha)</label>
+                  <input type="number" id="custo-produtividade" class="form-control" placeholder="Ex: 60" min="0" step="0.1" />
+                </div>
+                <div class="form-group">
+                  <label for="custo-preco-venda">Preço de Venda (R$/sc)</label>
+                  <input type="number" id="custo-preco-venda" class="form-control" placeholder="Ex: 120" min="0" step="0.01" />
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+                &#128200; Calcular Custos
+              </button>
+
+            </form>
+          </article>
+
+          <!-- Resultados -->
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128200; Resultados</h3>
+            </div>
+
+            <div class="custo-resultados">
+              <div class="resultado-card destaque">
+                <div class="result-value" id="custo-total">R$ 0,00</div>
+                <div class="result-label">Custo Total</div>
+              </div>
+              <div class="resultado-card purple">
+                <div class="result-value" id="custo-por-ha">R$ 0,00</div>
+                <div class="result-label">Custo por Hectare</div>
+              </div>
+              <div class="resultado-card teal">
+                <div class="result-value" id="custo-receita">R$ 0,00</div>
+                <div class="result-label">Receita Total</div>
+              </div>
+              <div class="resultado-card">
+                <div class="result-value" id="custo-producao">0</div>
+                <div class="result-label">Produção Total (sacas)</div>
+              </div>
+              <div class="resultado-card" style="border-color:var(--cor-primaria);border-width:2px;">
+                <div class="result-value text-primary" id="custo-lucro">R$ 0,00</div>
+                <div class="result-label">Lucro Estimado</div>
+              </div>
+              <div class="resultado-card" style="border-color:var(--cor-destaque);border-width:2px;">
+                <div class="result-value" id="custo-margem">0,0%</div>
+                <div class="result-label">Margem Líquida</div>
+              </div>
+            </div>
+
+            <div class="empty-state" style="display:none;" id="custo-empty">
+              <div class="empty-icon">&#128202;</div>
+              <h3>Nenhum cálculo ainda</h3>
+              <p>Preencha o formulário ao lado e clique em "Calcular Custos"</p>
+            </div>
+          </article>
+
+        </section>
+
+      </div>
+
+      <footer class="app-footer">
+        &copy; 2026 <span>AgroCalc Web</span> &mdash; Tecnologia para o agronegócio
+      </footer>
+
+    </main>
+
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/simulador.js"></script>
+
+</body>
+</html>

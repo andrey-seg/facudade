@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}AgroCalc Web - Custo de Produção{% endblock %}
+{% block nav_custo_producao %}active{% endblock %}
+
+{% block content %}
+<section class="page-header fade-in">
+  <div class="breadcrumb">AgroCalc / <span>Custo de Produção</span></div>
+  <h1>Custo de Produção</h1>
+  <p>Calcule custo total, receita, lucro e ponto de equilíbrio usando C(x) = CF + CV &middot; x</p>
+</section>
+
+<section class="custo-layout fade-in delay-1">
+  <article class="card">
+    <div class="card-header">
+      <h3>Dados de Entrada</h3>
+    </div>
+    <form id="cp-form">
+      <div class="form-group">
+        <label for="cp-cf">Custo Fixo (R$)</label>
+        <input type="number" id="cp-cf" class="form-control" placeholder="Ex: 50000" min="0" step="0.01" required />
+      </div>
+      <div class="form-group">
+        <label for="cp-cv">Custo Variável Unitário (R$/un)</label>
+        <input type="number" id="cp-cv" class="form-control" placeholder="Ex: 80" min="0" step="0.01" required />
+      </div>
+      <div class="form-group">
+        <label for="cp-producao">Produção (unidades)</label>
+        <input type="number" id="cp-producao" class="form-control" placeholder="Ex: 1000" min="0" step="1" required />
+      </div>
+      <div class="form-group">
+        <label for="cp-preco">Preço de Venda (R$/un)</label>
+        <input type="number" id="cp-preco" class="form-control" placeholder="Ex: 150" min="0" step="0.01" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg w-full mt-2">Calcular</button>
+    </form>
+  </article>
+
+  <article class="card">
+    <div class="card-header">
+      <h3>Resultados</h3>
+    </div>
+    <div class="custo-resultados" id="cp-resultados" style="display:none;">
+      <div class="resultado-card destaque">
+        <div class="result-value" id="cp-custo-total">R$ 0,00</div>
+        <div class="result-label">Custo Total</div>
+      </div>
+      <div class="resultado-card teal">
+        <div class="result-value" id="cp-receita">R$ 0,00</div>
+        <div class="result-label">Receita</div>
+      </div>
+      <div class="resultado-card" id="cp-lucro-card" style="border-width:2px;">
+        <div class="result-value" id="cp-lucro">R$ 0,00</div>
+        <div class="result-label">Lucro</div>
+      </div>
+      <div class="resultado-card purple">
+        <div class="result-value" id="cp-pe">0</div>
+        <div class="result-label">Ponto de Equilíbrio (un)</div>
+      </div>
+      <div class="resultado-card">
+        <div class="result-value" id="cp-custo-medio">R$ 0,00</div>
+        <div class="result-label">Custo Médio Unitário</div>
+      </div>
+      <div class="resultado-card">
+        <div class="result-value" id="cp-margem">R$ 0,00</div>
+        <div class="result-label">Margem de Contribuição</div>
+      </div>
+    </div>
+    <div class="empty-state" id="cp-empty">
+      <div class="empty-icon">&#128202;</div>
+      <h3>Nenhum cálculo ainda</h3>
+      <p>Preencha o formulário e clique em "Calcular"</p>
+    </div>
+
+    <canvas id="cp-chart" class="mt-2" style="width:100%;height:260px;display:none;"></canvas>
+  </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/simulador.js') }}"></script>
+{% endblock %}

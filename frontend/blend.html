@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgroCalc Web - Blend de Fertilizantes" />
+  <title>AgroCalc Web - Fertilizantes</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .fertilizante-card {
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .fertilizante-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .fertilizante-card .f-icon { font-size: 32px; margin-bottom: 8px; }
+    .fertilizante-card h4 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .fertilizante-card .f-comp { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+    .fertilizante-card .f-qtd { font-size: 20px; font-weight: 800; }
+    .fertilizante-card .f-qtd.green { color: var(--cor-primaria); }
+    .fertilizante-card .f-qtd.purple { color: var(--cor-destaque); }
+    .fertilizante-card .f-qtd.teal { color: var(--cor-secundaria); }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+  <button class="sidebar-toggle" aria-label="Abrir menu">&#9776;</button>
+
+  <div class="app-wrapper">
+
+    <aside class="sidebar" role="navigation" aria-label="Navegação principal">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">Agro<span>Calc</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+        <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+        <a href="custo.html"><span class="nav-icon">&#36;</span> Custos</a>
+        <a href="financiamento.html"><span class="nav-icon">&#9733;</span> Financiamento</a>
+        <div class="nav-label">Ferramentas</div>
+        <a href="conversor.html"><span class="nav-icon">&#8644;</span> Conversor</a>
+        <a href="talhoes.html"><span class="nav-icon">&#10070;</span> Talhões</a>
+        <a href="blend.html" class="active"><span class="nav-icon">&#9670;</span> Fertilizantes</a>
+        <div class="nav-label">Sistema</div>
+        <a href="computacao.html"><span class="nav-icon">&#9881;</span> Computação <span class="nav-badge">Novo</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">AC</div>
+          <div class="user-info">
+            <div class="user-name">AgroCalc</div>
+            <div class="user-role">Produtor Rural</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="header">
+        <div class="header-search">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" placeholder="Pesquisar fertilizantes..." aria-label="Pesquisar" />
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Alternar tema">&#x2600;&#xFE0F;</button>
+          <button class="notification-btn" aria-label="Notificações">&#128276;<span class="badge">3</span></button>
+          <div class="header-avatar">AC</div>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+
+        <section class="page-header fade-in">
+          <div class="breadcrumb">AgroCalc / <span>Blend de Fertilizantes</span></div>
+          <h1>Blend de Fertilizantes</h1>
+          <p>Resolva o sistema linear 3x3 para atingir a meta NPK usando Ureia, Superfosfato e KCl</p>
+        </section>
+
+        <section class="blend-layout fade-in delay-1">
+
+          <!-- Formulário -->
+          <article class="card">
+            <div class="card-header">
+              <h3>&#127793; Meta NPK (kg)</h3>
+              <span class="tag tag-info">Sistema 3x3</span>
+            </div>
+
+            <form id="blend-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="blend-n">Nitrogênio (N) desejado (kg)</label>
+                  <input type="number" id="blend-n" class="form-control" value="100" min="0" step="0.1" required />
+                  <div class="form-hint">Ex: 100 kg de N</div>
+                </div>
+                <div class="form-group">
+                  <label for="blend-p">Fósforo (P) desejado (kg)</label>
+                  <input type="number" id="blend-p" class="form-control" value="50" min="0" step="0.1" required />
+                  <div class="form-hint">Ex: 50 kg de P</div>
+                </div>
+                <div class="form-group">
+                  <label for="blend-k">Potássio (K) desejado (kg)</label>
+                  <input type="number" id="blend-k" class="form-control" value="80" min="0" step="0.1" required />
+                  <div class="form-hint">Ex: 80 kg de K</div>
+                </div>
+              </div>
+
+              <div style="padding:12px;border-radius:var(--radius-xs);background:rgba(255,255,255,0.03);margin-bottom:16px;font-size:13px;color:var(--text-secondary);">
+                <strong style="color:var(--cor-primaria);">Fertilizantes disponíveis:</strong><br>
+                &#9679; Ureia (45% N, 0% P, 0% K)<br>
+                &#9679; Superfosfato (0% N, 18% P, 0% K)<br>
+                &#9679; KCl (0% N, 0% P, 58% K)
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-full">
+                &#128200; Resolver Sistema
+              </button>
+            </form>
+
+            <!-- Erro determinante -->
+            <div id="blend-erro" style="display:none;margin-top:16px;padding:16px;border-radius:var(--radius-sm);background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);text-align:center;">
+              <div style="font-size:32px;margin-bottom:8px;">&#9888;</div>
+              <div id="blend-erro-msg" style="color:#ef4444;font-weight:600;">Erro</div>
+            </div>
+          </article>
+
+          <!-- Resultados -->
+          <article class="card">
+            <div class="card-header">
+              <h3>&#128202; Resultados</h3>
+            </div>
+
+            <div id="blend-empty" class="empty-state">
+              <div class="empty-icon">&#127793;</div>
+              <h3>Nenhum cálculo ainda</h3>
+              <p>Defina as metas N, P, K e clique em "Resolver Sistema"</p>
+            </div>
+
+            <div id="blend-resultados" style="display:none;">
+
+              <!-- Cards dos fertilizantes -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+                <div class="fertilizante-card" style="border-color:rgba(0,208,132,0.3);background:rgba(0,208,132,0.03);">
+                  <div class="f-icon">&#9888;</div>
+                  <h4>Ureia</h4>
+                  <div class="f-comp">45% N</div>
+                  <div class="f-qtd green" id="blend-qtd-ureia">0 kg</div>
+                </div>
+                <div class="fertilizante-card" style="border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.03);">
+                  <div class="f-icon">&#9888;</div>
+                  <h4>Superfosfato</h4>
+                  <div class="f-comp">18% P</div>
+                  <div class="f-qtd purple" id="blend-qtd-superfosfato">0 kg</div>
+                </div>
+                <div class="fertilizante-card" style="border-color:rgba(45,212,191,0.3);background:rgba(45,212,191,0.03);">
+                  <div class="f-icon">&#9888;</div>
+                  <h4>KCl</h4>
+                  <div class="f-comp">58% K</div>
+                  <div class="f-qtd teal" id="blend-qtd-kcl">0 kg</div>
+                </div>
+              </div>
+
+              <!-- Total -->
+              <div style="margin-bottom:20px;padding:16px;border-radius:var(--radius-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);">
+                <div style="display:flex;justify-content:space-between;">
+                  <span style="color:var(--text-secondary);font-size:14px;">Total de Fertilizantes</span>
+                  <span style="font-weight:700;font-size:20px;color:var(--cor-primaria);" id="blend-total-kg">0 kg</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:8px;">
+                  <span style="color:var(--text-secondary);font-size:14px;">Determinante da Matriz</span>
+                  <span style="font-weight:600;font-size:16px;color:var(--cor-destaque);" id="blend-determinante">0</span>
+                </div>
+              </div>
+
+              <!-- Gráfico -->
+              <div style="margin-bottom:20px;">
+                <div class="chart-header">
+                  <h3>Composição NPK Fornecida</h3>
+                  <div class="chart-legend">
+                    <span class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--cor-primaria);"></span> N</span>
+                    <span class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--cor-destaque);"></span> P</span>
+                    <span class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--cor-secundaria);"></span> K</span>
+                  </div>
+                </div>
+                <div class="chart-container chart-container-sm">
+                  <canvas id="blend-chart"></canvas>
+                </div>
+              </div>
+
+              <!-- Tabela detalhada -->
+              <div>
+                <h4 style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:12px;">Tabela Detalhada do Sistema</h4>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Fertilizante</th>
+                        <th>%N</th>
+                        <th>%P</th>
+                        <th>%K</th>
+                        <th>Quantidade (kg)</th>
+                        <th>N (kg)</th>
+                        <th>P (kg)</th>
+                        <th>K (kg)</th>
+                      </tr>
+                    </thead>
+                    <tbody id="blend-tabela-body"></tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+        </section>
+
+      </div>
+
+      <footer class="app-footer">
+        &copy; 2026 <span>AgroCalc Web</span> &mdash; Tecnologia para o agronegócio
+      </footer>
+
+    </main>
+
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="js/app.js"></script>
+  <script>
+    const BlendResolver = {
+      init() {
+        this.form = document.getElementById('blend-form')
+        this.setupEvents()
+      },
+
+      setupEvents() {
+        if (!this.form) return
+        this.form.addEventListener('submit', (e) => {
+          e.preventDefault()
+          this.resolver()
+        })
+      },
+
+      async resolver() {
+        const getVal = (id) => parseFloat(document.getElementById(id)?.value) || 0
+        const n = getVal('blend-n')
+        const p = getVal('blend-p')
+        const k = getVal('blend-k')
+
+        if (n <= 0 && p <= 0 && k <= 0) {
+          AgroCalc.showToast('Informe pelo menos uma meta NPK', 'error')
+          return
+        }
+
+        const payload = { n, p, k }
+
+        try {
+          const response = await fetch('/api/blend/resolver', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          })
+
+          const data = await response.json()
+
+          if (!response.ok) {
+            document.getElementById('blend-empty').style.display = 'none'
+            document.getElementById('blend-resultados').style.display = 'none'
+            const erroDiv = document.getElementById('blend-erro')
+            document.getElementById('blend-erro-msg').textContent = data.erro || 'Erro ao resolver sistema'
+            erroDiv.style.display = 'block'
+            AgroCalc.showToast(data.erro || 'Erro ao resolver sistema', 'error')
+            return
+          }
+
+          document.getElementById('blend-erro').style.display = 'none'
+          document.getElementById('blend-empty').style.display = 'none'
+          document.getElementById('blend-resultados').style.display = ''
+
+          this.exibirResultados(data)
+          this.desenharGrafico(data)
+          this.gerarTabela(data)
+          AgroCalc.showToast('Sistema resolvido com sucesso!', 'success')
+        } catch (e) {
+          AgroCalc.showToast('Erro ao conectar com o servidor', 'error')
+        }
+      },
+
+      exibirResultados(data) {
+        document.getElementById('blend-qtd-ureia').textContent = AgroCalc.formatNumber(data.quantidades.ureia) + ' kg'
+        document.getElementById('blend-qtd-superfosfato').textContent = AgroCalc.formatNumber(data.quantidades.superfosfato) + ' kg'
+        document.getElementById('blend-qtd-kcl').textContent = AgroCalc.formatNumber(data.quantidades.kcl) + ' kg'
+        document.getElementById('blend-total-kg').textContent = AgroCalc.formatNumber(data.total_fertilizantes_kg) + ' kg'
+        document.getElementById('blend-determinante').textContent = data.determinante
+      },
+
+      desenharGrafico(data) {
+        const canvas = document.getElementById('blend-chart')
+        if (!canvas) return
+
+        const parent = canvas.parentElement
+        const rect = parent.getBoundingClientRect()
+        const W = rect.width || 600
+        const H = 220
+        const scale = window.devicePixelRatio || 1
+        canvas.width = W * scale
+        canvas.height = H * scale
+        canvas.style.width = W + 'px'
+        canvas.style.height = H + 'px'
+
+        const ctx = canvas.getContext('2d')
+        ctx.scale(scale, scale)
+        ctx.clearRect(0, 0, W, H)
+
+        const style = getComputedStyle(document.documentElement)
+        const textColor = style.getPropertyValue('--text-muted').trim() || '#94a3b8'
+        const gridColor = 'rgba(255,255,255,0.04)'
+
+        const pad = { top: 20, right: 20, bottom: 36, left: 56 }
+        const chartW = W - pad.left - pad.right
+        const chartH = H - pad.top - pad.bottom
+
+        const values = [
+          { label: 'N', value: data.fornecido_npk.n, color: '#00D084' },
+          { label: 'P', value: data.fornecido_npk.p, color: '#8B5CF6' },
+          { label: 'K', value: data.fornecido_npk.k, color: '#2DD4BF' },
+        ]
+
+        const maxVal = Math.max(...values.map(v => v.value), 1) * 1.2
+
+        for (let i = 0; i <= 4; i++) {
+          const y = pad.top + (chartH / 4) * i
+          ctx.strokeStyle = gridColor
+          ctx.lineWidth = 1
+          ctx.beginPath()
+          ctx.moveTo(pad.left, y)
+          ctx.lineTo(W - pad.right, y)
+          ctx.stroke()
+          ctx.fillStyle = textColor
+          ctx.font = '10px sans-serif'
+          ctx.textAlign = 'right'
+          ctx.fillText(Math.round(maxVal - (maxVal / 4) * i), pad.left - 8, y + 4)
+        }
+
+        const barW = Math.min(60, (chartW / 3) * 0.6)
+        const gap = (chartW - barW * 3) / 4
+
+        values.forEach((v, i) => {
+          const x = pad.left + gap + i * (barW + gap)
+          const barH = (v.value / maxVal) * chartH
+          const y = pad.top + chartH - barH
+
+          const gradient = ctx.createLinearGradient(x, y, x, pad.top + chartH)
+          gradient.addColorStop(0, v.color)
+          gradient.addColorStop(1, v.color + '60')
+          ctx.fillStyle = gradient
+
+          ctx.beginPath()
+          ctx.roundRect(x, y, barW, barH, [4, 4, 0, 0])
+          ctx.fill()
+
+          ctx.fillStyle = v.color
+          ctx.font = 'bold 14px sans-serif'
+          ctx.textAlign = 'center'
+          ctx.fillText(AgroCalc.formatNumber(v.value) + ' kg', x + barW / 2, y - 8)
+
+          ctx.fillStyle = textColor
+          ctx.font = '12px sans-serif'
+          ctx.fillText(v.label, x + barW / 2, pad.top + chartH + 18)
+        })
+      },
+
+      gerarTabela(data) {
+        const tbody = document.getElementById('blend-tabela-body')
+        if (!tbody) return
+
+        const fertilizantes = [
+          { nome: 'Ureia', nPct: 45, pPct: 0, kPct: 0, qtd: data.quantidades.ureia },
+          { nome: 'Superfosfato', nPct: 0, pPct: 18, kPct: 0, qtd: data.quantidades.superfosfato },
+          { nome: 'KCl', nPct: 0, pPct: 0, kPct: 58, qtd: data.quantidades.kcl },
+        ]
+
+        tbody.innerHTML = fertilizantes.map(f => {
+          const nKg = (f.nPct / 100) * f.qtd
+          const pKg = (f.pPct / 100) * f.qtd
+          const kKg = (f.kPct / 100) * f.qtd
+          return `<tr>
+            <td><strong>${f.nome}</strong></td>
+            <td>${f.nPct}%</td>
+            <td>${f.pPct}%</td>
+            <td>${f.kPct}%</td>
+            <td style="font-weight:700;">${AgroCalc.formatNumber(f.qtd)}</td>
+            <td style="color:var(--cor-primaria);">${AgroCalc.formatNumber(nKg)}</td>
+            <td style="color:var(--cor-destaque);">${AgroCalc.formatNumber(pKg)}</td>
+            <td style="color:var(--cor-secundaria);">${AgroCalc.formatNumber(kKg)}</td>
+          </tr>`
+        }).join('')
+
+        const linhaTotal = document.createElement('tr')
+        linhaTotal.style.background = 'rgba(0,208,132,0.06)'
+        linhaTotal.innerHTML = `
+          <td><strong>Total</strong></td>
+          <td>-</td><td>-</td><td>-</td>
+          <td style="font-weight:700;">${AgroCalc.formatNumber(data.total_fertilizantes_kg)}</td>
+          <td style="font-weight:700;color:var(--cor-primaria);">${AgroCalc.formatNumber(data.fornecido_npk.n)}</td>
+          <td style="font-weight:700;color:var(--cor-destaque);">${AgroCalc.formatNumber(data.fornecido_npk.p)}</td>
+          <td style="font-weight:700;color:var(--cor-secundaria);">${AgroCalc.formatNumber(data.fornecido_npk.k)}</td>`
+        tbody.appendChild(linhaTotal)
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => BlendResolver.init())
+  </script>
+
+</body>
+</html>

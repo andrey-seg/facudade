@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}AgroCalc Web - Custos{% endblock %}
+{% block nav_custo %}active{% endblock %}
+
+{% block content %}
+<section class="page-header fade-in">
+  <div class="breadcrumb">AgroCalc / <span>Calculadora de Custos</span></div>
+  <h1>Calculadora de Custos</h1>
+  <p>Simule os custos operacionais da sua produção agrícola</p>
+</section>
+
+<section class="custo-layout fade-in delay-1">
+  <article class="card">
+    <div class="card-header">
+      <h3>&#128202; Dados da Propriedade</h3>
+    </div>
+    <form id="custo-form">
+      <div class="form-group">
+        <label for="custo-area">Área Cultivada (hectares)</label>
+        <input type="number" id="custo-area" class="form-control" placeholder="Ex: 100" min="0" step="0.1" required />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="custo-sementes">Sementes (R$)</label>
+          <input type="number" id="custo-sementes" class="form-control" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label for="custo-fertilizantes">Fertilizantes (R$)</label>
+          <input type="number" id="custo-fertilizantes" class="form-control" placeholder="0" min="0" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="custo-defensivos">Defensivos (R$)</label>
+          <input type="number" id="custo-defensivos" class="form-control" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label for="custo-mao-obra">Mão de Obra (R$)</label>
+          <input type="number" id="custo-mao-obra" class="form-control" placeholder="0" min="0" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="custo-irrigacao">Irrigação (R$)</label>
+          <input type="number" id="custo-irrigacao" class="form-control" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label for="custo-transporte">Transporte (R$)</label>
+          <input type="number" id="custo-transporte" class="form-control" placeholder="0" min="0" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="custo-outros">Outros Custos (R$)</label>
+        <input type="number" id="custo-outros" class="form-control" placeholder="0" min="0" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="custo-produtividade">Produtividade (sc/ha)</label>
+          <input type="number" id="custo-produtividade" class="form-control" placeholder="Ex: 60" min="0" step="0.1" />
+        </div>
+        <div class="form-group">
+          <label for="custo-preco-venda">Preço de Venda (R$/sc)</label>
+          <input type="number" id="custo-preco-venda" class="form-control" placeholder="Ex: 120" min="0" step="0.01" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg w-full mt-2">&#128200; Calcular Custos</button>
+    </form>
+  </article>
+
+  <article class="card">
+    <div class="card-header">
+      <h3>&#128200; Resultados</h3>
+    </div>
+    <div class="custo-resultados">
+      <div class="resultado-card destaque">
+        <div class="result-value" id="custo-total">R$ 0,00</div>
+        <div class="result-label">Custo Total</div>
+      </div>
+      <div class="resultado-card purple">
+        <div class="result-value" id="custo-por-ha">R$ 0,00</div>
+        <div class="result-label">Custo por Hectare</div>
+      </div>
+      <div class="resultado-card teal">
+        <div class="result-value" id="custo-receita">R$ 0,00</div>
+        <div class="result-label">Receita Total</div>
+      </div>
+      <div class="resultado-card">
+        <div class="result-value" id="custo-producao">0</div>
+        <div class="result-label">Produção Total (sacas)</div>
+      </div>
+      <div class="resultado-card" style="border-color:var(--cor-primaria);border-width:2px;">
+        <div class="result-value text-primary" id="custo-lucro">R$ 0,00</div>
+        <div class="result-label">Lucro Estimado</div>
+      </div>
+      <div class="resultado-card" style="border-color:var(--cor-destaque);border-width:2px;">
+        <div class="result-value" id="custo-margem">0,0%</div>
+        <div class="result-label">Margem Líquida</div>
+      </div>
+    </div>
+    <div class="empty-state" style="display:none;" id="custo-empty">
+      <div class="empty-icon">&#128202;</div>
+      <h3>Nenhum cálculo ainda</h3>
+      <p>Preencha o formulário ao lado e clique em "Calcular Custos"</p>
+    </div>
+  </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/simulador.js') }}"></script>
+{% endblock %}

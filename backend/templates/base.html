@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgroCalc Web - Plataforma inteligente para o agronegócio" />
+  <title>{% block title %}AgroCalc Web{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+</head>
+<body>
+  <div class="sidebar-overlay"></div>
+  <button class="sidebar-toggle" aria-label="Abrir menu">&#9776;</button>
+
+  <div class="app-wrapper">
+    <aside class="sidebar" role="navigation" aria-label="Navegação principal">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">Agro<span>Calc</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+        <a href="{{ url_for('index') }}" class="{% block nav_dashboard %}{% endblock %}"><span class="nav-icon">&#9632;</span> Dashboard</a>
+        <a href="{{ url_for('custo') }}" class="{% block nav_custo %}{% endblock %}"><span class="nav-icon">&#36;</span> Custos</a>
+        <a href="{{ url_for('custo_producao') }}" class="{% block nav_custo_producao %}{% endblock %}"><span class="nav-icon">&#36;</span> Custo de Produção</a>
+        <a href="{{ url_for('financiamento') }}" class="{% block nav_financiamento %}{% endblock %}"><span class="nav-icon">&#9733;</span> Financiamento</a>
+        <div class="nav-label">Ferramentas</div>
+        <a href="{{ url_for('conversor') }}" class="{% block nav_conversor %}{% endblock %}"><span class="nav-icon">&#8644;</span> Conversor</a>
+        <a href="{{ url_for('talhoes') }}" class="{% block nav_talhoes %}{% endblock %}"><span class="nav-icon">&#10070;</span> Talhões</a>
+        <a href="{{ url_for('blend') }}" class="{% block nav_blend %}{% endblock %}"><span class="nav-icon">&#9670;</span> Fertilizantes</a>
+        <div class="nav-label">Sistema</div>
+        <a href="{{ url_for('computacao') }}" class="{% block nav_computacao %}{% endblock %}"><span class="nav-icon">&#9881;</span> Computação <span class="nav-badge">Novo</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">AC</div>
+          <div class="user-info">
+            <div class="user-name">AgroCalc</div>
+            <div class="user-role">Produtor Rural</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <div class="header-search">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar" />
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Alternar tema">&#x2600;&#xFE0F;</button>
+          <button class="notification-btn" aria-label="Notificações">&#128276;<span class="badge">3</span></button>
+          <div class="header-avatar">AC</div>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+        {% block content %}{% endblock %}
+      </div>
+
+      <footer class="app-footer">
+        &copy; 2026 <span>AgroCalc Web</span> &mdash; Tecnologia para o agronegócio
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

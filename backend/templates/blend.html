@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}AgroCalc Web - Fertilizantes{% endblock %}
+{% block nav_blend %}active{% endblock %}
+
+{% block content %}
+<section class="page-header fade-in">
+  <div class="breadcrumb">AgroCalc / <span>Blend de Fertilizantes</span></div>
+  <h1>Blend de Fertilizantes</h1>
+  <p>Composição personalizada de fertilizantes NPK</p>
+</section>
+
+<section class="blend-layout fade-in delay-1">
+  <article class="card">
+    <div class="card-header">
+      <h3>&#9670; Composição do Blend</h3>
+    </div>
+    <form id="blend-form">
+      <div class="form-group">
+        <label for="blend-nome">Nome do Blend</label>
+        <input type="text" id="blend-nome" class="form-control" value="Blend Premium Soja" />
+      </div>
+      <div class="form-group">
+        <label for="blend-area">Área de Aplicação (ha)</label>
+        <input type="number" id="blend-area" class="form-control" value="100" min="0" step="0.1" />
+      </div>
+      <div class="form-group">
+        <label>Nitrogênio (N) - <span id="blend-n-value">20</span>%</label>
+        <input type="range" id="blend-n" class="blend-slider" min="0" max="100" value="20" step="1" />
+      </div>
+      <div class="form-group">
+        <label>Fósforo (P) - <span id="blend-p-value">30</span>%</label>
+        <input type="range" id="blend-p" class="blend-slider" min="0" max="100" value="30" step="1" />
+      </div>
+      <div class="form-group">
+        <label>Potássio (K) - <span id="blend-k-value">40</span>%</label>
+        <input type="range" id="blend-k" class="blend-slider" min="0" max="100" value="40" step="1" />
+      </div>
+      <div class="blend-bar" id="blend-bar">
+        <div class="blend-bar-segment" style="width:20%;background:var(--cor-primaria);" id="blend-bar-n">20%</div>
+        <div class="blend-bar-segment" style="width:30%;background:var(--cor-destaque);" id="blend-bar-p">30%</div>
+        <div class="blend-bar-segment" style="width:40%;background:var(--cor-secundaria);" id="blend-bar-k">40%</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="blend-tipo">Tipo de Cultura</label>
+          <select id="blend-tipo" class="form-control">
+            <option value="soja" selected>Soja</option>
+            <option value="milho">Milho</option>
+            <option value="cafe">Café</option>
+            <option value="algodao">Algodão</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="blend-dose">Dose Recomendada (kg/ha)</label>
+          <input type="number" id="blend-dose" class="form-control" value="350" min="0" step="5" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg w-full mt-2">&#128200; Calcular Blend</button>
+    </form>
+  </article>
+
+  <article class="card">
+    <div class="card-header">
+      <h3>&#128202; Análise Nutricional</h3>
+    </div>
+    <div class="blend-nutrient-grid" id="blend-nutrients">
+      <div class="nutrient-card" style="border-color:rgba(0,208,132,0.3);">
+        <div class="n-value" id="blend-n-total">20%</div>
+        <div class="n-label">Nitrogênio (N)</div>
+        <div style="font-size:28px;margin-top:4px;">&#127793;</div>
+      </div>
+      <div class="nutrient-card" style="border-color:rgba(139,92,246,0.3);">
+        <div class="n-value" style="color:var(--cor-destaque);" id="blend-p-total">30%</div>
+        <div class="n-label">Fósforo (P)</div>
+        <div style="font-size:28px;margin-top:4px;">&#127793;</div>
+      </div>
+      <div class="nutrient-card" style="border-color:rgba(45,212,191,0.3);">
+        <div class="n-value" style="color:var(--cor-secundaria);" id="blend-k-total">40%</div>
+        <div class="n-label">Potássio (K)</div>
+        <div style="font-size:28px;margin-top:4px;">&#127793;</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:16px;border-radius:var(--radius-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <span style="color:var(--text-secondary);font-size:14px;">Total do Blend</span>
+        <span style="font-weight:700;font-size:18px;color:var(--text-primary);" id="blend-total-kg">350 kg/ha</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <span style="color:var(--text-secondary);font-size:14px;">Quantidade Total</span>
+        <span style="font-weight:700;font-size:18px;color:var(--cor-primaria);" id="blend-quantidade-total">35.000 kg</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="color:var(--text-secondary);font-size:14px;">Custo Estimado</span>
+        <span style="font-weight:700;font-size:18px;color:var(--cor-destaque);" id="blend-custo">R$ 42.000,00</span>
+      </div>
+    </div>
+  </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const nSlider = document.getElementById('blend-n')
+  const pSlider = document.getElementById('blend-p')
+  const kSlider = document.getElementById('blend-k')
+  const nVal = document.getElementById('blend-n-value')
+  const pVal = document.getElementById('blend-p-value')
+  const kVal = document.getElementById('blend-k-value')
+  const barN = document.getElementById('blend-bar-n')
+  const barP = document.getElementById('blend-bar-p')
+  const barK = document.getElementById('blend-bar-k')
+
+  function updateBlend() {
+    const n = parseInt(nSlider.value)
+    const p = parseInt(pSlider.value)
+    const k = parseInt(kSlider.value)
+    const total = n + p + k
+    let pctN = total > 0 ? (n / total) * 100 : 33.3
+    let pctP = total > 0 ? (p / total) * 100 : 33.3
+    let pctK = total > 0 ? (k / total) * 100 : 33.3
+
+    nVal.textContent = n
+    pVal.textContent = p
+    kVal.textContent = k
+
+    barN.style.width = pctN + '%'
+    barN.textContent = Math.round(pctN) + '%'
+    barP.style.width = pctP + '%'
+    barP.textContent = Math.round(pctP) + '%'
+    barK.style.width = pctK + '%'
+    barK.textContent = Math.round(pctK) + '%'
+
+    document.getElementById('blend-n-total').textContent = n + '%'
+    document.getElementById('blend-p-total').textContent = p + '%'
+    document.getElementById('blend-k-total').textContent = k + '%'
+  }
+
+  nSlider?.addEventListener('input', updateBlend)
+  pSlider?.addEventListener('input', updateBlend)
+  kSlider?.addEventListener('input', updateBlend)
+
+  document.getElementById('blend-form').addEventListener('submit', async function(e) {
+    e.preventDefault()
+    const dados = {
+      nome: document.getElementById('blend-nome').value,
+      area: parseFloat(document.getElementById('blend-area').value) || 0,
+      n: parseInt(nSlider.value) || 0,
+      p: parseInt(pSlider.value) || 0,
+      k: parseInt(kSlider.value) || 0,
+      tipo_cultura: document.getElementById('blend-tipo').value,
+      dose: parseFloat(document.getElementById('blend-dose').value) || 0,
+    }
+
+    try {
+      const res = await fetch('/api/blend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+      })
+      const data = await res.json()
+
+      if (res.ok) {
+        document.getElementById('blend-total-kg').textContent = data.total_blend_kg_ha + ' kg/ha'
+        document.getElementById('blend-quantidade-total').textContent = AgroCalc.formatNumber(data.quantidade_total_kg) + ' kg'
+        document.getElementById('blend-custo').textContent = AgroCalc.formatCurrency(data.custo_total)
+        AgroCalc.showToast(`Blend NPK (${dados.n}-${dados.p}-${dados.k}) calculado!`, 'success')
+      } else {
+        AgroCalc.showToast(data.erro || 'Erro ao calcular blend', 'error')
+      }
+    } catch (err) {
+      AgroCalc.showToast('Erro de conexão', 'error')
+    }
+  })
+})
+</script>
+{% endblock %}
