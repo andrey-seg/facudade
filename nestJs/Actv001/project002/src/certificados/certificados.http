@@ -1,0 +1,14 @@
+###LISTAR CERTIFICADOS POR PERIODO
+GET http://localhost:3000/certificados
+
+###CONTABILIZAR TOTAL DE HORAS
+GET http://localhost:3000/certificados
+
+###CONTABILIZAR TOTAL DE HORAS POR PERIODO 
+GET http://localhost:3000/certificados
+
+###VERIFICAR PORCENTAGEM 
+GET http://localhost:3000/certificados
+
+###VERIFICAR QUANTIDADE
+GET http://localhost:3000/certificados
