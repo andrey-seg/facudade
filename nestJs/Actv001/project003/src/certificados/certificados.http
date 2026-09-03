@@ -1,0 +1,26 @@
+###POSTAR CERTIFICADO
+POST http://localhost:3000/certificados
+Content-Type: application/json
+
+{
+    "titulo": "tads",
+    "cargaHoraria": 2000,
+    "dataInicio": "12/03/2025",
+    "dataFim": "12/20/2027",
+    "instituicao": "ifms"
+}
+
+###LISTAR CERTIFICADOS POR PERIODO
+GET http://localhost:3000/certificados
+
+###CONTABILIZAR TOTAL DE HORAS
+GET http://localhost:3000/certificados/totalhoras
+
+###CONTABILIZAR TOTAL DE HORAS POR PERIODO 
+GET http://localhost:3000/certificados
+
+###VERIFICAR PORCENTAGEM 
+GET http://localhost:3000/certificados
+
+###VERIFICAR QUANTIDADE
+GET http://localhost:3000/certificados
