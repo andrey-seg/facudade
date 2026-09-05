@@ -196,5 +196,43 @@ WHERE area_atuacao <> 'fisica';
 considerado "em andamento" se a data atual estiver entre sua data de início e de
 fim */
 
-SELECT * FORM Projeto
-WHERE data_inicio < data_fim < '04-09-2026';
+SELECT * FROM Projeto
+WHERE CURRENT_DATE BETWEEN data_inicio AND data_fim;
+
+/* E) Listar o nome e a área de atuação de todos os professores que são da área de
+'Biologia' OU 'Química */
+
+SELECT nome, area_atuacao FROM professor
+WHERE area_atuacao <> 'Biologia' OR area_atuacao <> 'Química';
+
+/* F) Consultar o nome e o tipo de todos os recursos que NÃO são do tipo
+'Equipamento’.*/
+
+SELECT * FROM recurso
+WHERE tipo <> material OR tipo IS NULL;
+
+/*G) O projeto 'Computação Móvel' precisa de mais tempo e sua data final
+será estendida para 30 de novembro de 2025*/
+
+UPDATE atividade
+SET data_fim = '2026-12-10'
+WHERE nome_atividade = 'Computação Móvel';
+
+
+/* H) O nome da atividade com id_atividade igual a 2, "Experimento 1", é muito genérico.
+É necessário atualizá-lo para "Experimento de Refração da Luz" para refletir melhor o
+seu propósito.*/
+
+UPDATE atividade SET nome_atividade = 'Experimento de Refração da Luz' WHERE id_atividade = 2;
+
+/* I) Listar os orientadores da área de Tecnologia */
+SELECT * FROM orientadores
+WHERE area_atuacao = 'tecnologia';
+
+/* J) Listar orientadores cujo ID seja maior que 3 */
+SELECT id_orientador FROM orientadores
+WHERE id_orientador > 3;
+
+/* K) Listar orientadores que não são da área de Educação */
+SELECT area_atuacao FROM orientadores
+WHERE area_atuacao <> 'Educação';
